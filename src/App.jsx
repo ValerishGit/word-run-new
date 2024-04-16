@@ -2,7 +2,7 @@
 import './App.css'
 import { BrowserRouter as Router,  Routes ,Route  } from 'react-router-dom';
 import HomeScreen from './components/homeScreen/HomeScreen';
-import GameScreen from './components/gameScreen/GameScreen';
+import GameScreen from "./components/gameScreen/GameScreen";
 
 
 function App() {
