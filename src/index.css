@@ -8,7 +8,7 @@
   font-weight: 600;
   font-style: normal;
   line-height: 1.5;
-
+  width: 100%;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -17,6 +17,39 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.simple-keyboard {
+  max-width: 850px;
+}
+
+/*
+  Theme: myTheme1
+*/
+.simple-keyboard.myTheme1 {
+  background-color: rgba(36, 36, 36, 1);
+  border-radius: 0;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.simple-keyboard.myTheme1 .hg-button {
+  height: 60px;
+  font-size: 24px;
+  width: 60px;
+  font-family: "Nunito", sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(255, 195, 106);
+  color: black;
+
+
+}
+
+.simple-keyboard.myTheme1 .hg-button:active {
+  background: #1c4995;
+  color: black;
 }
 
 body {
