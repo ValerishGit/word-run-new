@@ -20,14 +20,14 @@ const CountdownComponent = ({onComplete}) => {
           setCount("Start")
           onComplete();
         }
-      }, 1000);
+      }, 1100);
   
       return () => clearTimeout(timer);
     }, [count]);
   
     return (
       <div className="flex justify-center items-center ">
-          <div className={`text-5xl font-bold ${visible ? 'animate-fade-in' : 'animate-fade-out'}`}>
+          <div className={`text-8xl font-bold text-orange-300  ${visible ? 'animate-fade-in' : 'animate-fade-out'}`}>
             {count == 0 ? "Start" : count}
           </div>
      

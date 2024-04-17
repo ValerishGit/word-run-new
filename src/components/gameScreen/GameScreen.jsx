@@ -1,91 +1,87 @@
 import { useNavigate } from "react-router-dom";
 import CountdownComponent from "../countDown/CountDown";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import GlowingButton from "../glowingButton/GlowingButton";
+import TimeComponent from "../timerComponent/TimerComponent";
+import WordBox from "../wordBox/WordBox";
 
-const words = ['apple','moose',"door","workfsfdasd","homesadfasf",'wife',"dog"]
+export const GameScreen = ({ isHardMode }) => {
+  const [isStart, setIsStart] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [gameClock, setGameClock] = useState(30);
 
-export const GameScreen = () => {
-    const [isStart, setIsStart] = useState(false);
-    const [currentWord, setCurrentWord] = useState(words[Math.floor(Math.random() * words.length)]);
-    const [typedLetters, setTypedLetters] = useState(Array(currentWord.length).fill(false));
-    const [expectedIndex, setExpectedIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const navigateTo = useNavigate();
 
-    const navigateTo = useNavigate();
+  const backHome = () => {
+    navigateTo("/");
+  };
 
-    const endGame = () => {
-        navigateTo('/');
-    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 
+  const onTimerCompleted = () => {
+    setIsStart((tempisStart) => !tempisStart);
+  };
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const onWordTypedCorrectly = () =>{
-        console.log("Word Typed")
-        setCurrentWord(words[Math.floor(Math.random() * words.length)])
-        setTypedLetters(Array(currentWord.length).fill(false));
-    }
-    
-    useEffect(() => {
-        const handleKeyPress = (event) => {
-            const inputLetter = event.key.toLowerCase();
-            const expectedLetter = currentWord[expectedIndex].toLowerCase();
-      
-            if (inputLetter === expectedLetter) {
-              const newTypedLetters = [...typedLetters];
-              newTypedLetters[expectedIndex] = true;
-              setTypedLetters(newTypedLetters);
-              setExpectedIndex(prevIndex => prevIndex + 1);
-      
-              if (expectedIndex === currentWord.length - 1) {
-                onWordTypedCorrectly();
-                setTypedLetters(Array(currentWord.length).fill(false)); // Reset typedLetters for the next word
-                setExpectedIndex(0); // Reset expectedIndex for the next word
-              }
-            } else {
-              setExpectedIndex(0); // Reset expectedIndex if typed incorrectly
-              setTypedLetters(Array(currentWord.length).fill(false)); // Reset typedLetters if typed incorrectly
-            }
-          };
-      
-    
-        document.addEventListener('keydown', handleKeyPress);
-    
-        return () => {
-          document.removeEventListener('keydown', handleKeyPress);
-        };
-      }, [typedLetters, currentWord, expectedIndex, onWordTypedCorrectly]);
+  const onTimeOut = () => {
+    setIsGameOver(true);
+  };
 
+  const addScore = (lenght) => {
+    let mult = lenght * 2;
+    setScore((prevScore) => prevScore + mult);
+  };
 
+  const restartGame = () => {
+    setIsGameOver(false);
+    setIsStart(false);
+    setScore(0);
+  };
 
-    const RoundedBox = ({ word }) => {
-        RoundedBox.propTypes = {
-            word: PropTypes.string
-        };
-        return ( 
-             <div className="bg-darkblue-800 rounded-lg py-6 w-[70vw]  border-orange-300 border  drop-shadow-none mx-auto ">
-            {word.split('').map((letter, index) => (
-              <span key={index} className={`font-bold text-2xl px-1 inline-block`} style={{ color: typedLetters[index] ? 'white' : 'grey' }}>
-                {letter}
-              </span>
-            ))}
-          </div>
-  
-           
-        );
-    };
-
-
-    const onTimerCompleted = () => {
-        setIsStart(tempisStart => !tempisStart);
-    };
-
+  const GameOverSection = () => {
     return (
-        <div className="">
-            {!isStart ? <CountdownComponent onComplete={onTimerCompleted}></CountdownComponent> : <div className="flex flex-col justify-center items-center gap-5 min-w-[300px] max-w-[50vw]">
-            <RoundedBox word={currentWord}/>
-            </div>}
+      <div className="flex flex-col gap-5">
+        <h1>
+          Game <span className="text-orange-300">Over</span>
+        </h1>
+        <h1>{score}</h1>
+        <div className="flex flex-col md:flex-row  gap-5 items-center justify-center">
+          <GlowingButton onClick={restartGame}>Try Again</GlowingButton>
+          <GlowingButton onClick={backHome}>Back</GlowingButton>
         </div>
+      </div>
     );
+  };
+
+  const MainGameScreen = () => {
+    return !isGameOver ? (
+      <div className="flex flex-col h-screen w-[60vw] justify-evenly items-stretch">
+        <div className="flex flex-col md:flex-row gap-6 items-center justify-evenly ">
+          <TimeComponent
+            gameClock={gameClock}
+            onTimeOut={onTimeOut}
+          ></TimeComponent>
+          <p className="font-bold text-3xl">{score}</p>
+        </div>
+        <WordBox onCorrect={addScore}></WordBox>
+        <div className="h-[40vh]"></div>
+      </div>
+    ) : (
+      <GameOverSection></GameOverSection>
+    );
+  };
+
+  return (
+    <div>
+      {!isStart ? (
+        <CountdownComponent onComplete={onTimerCompleted}></CountdownComponent>
+      ) : (
+        <MainGameScreen></MainGameScreen>
+      )}
+    </div>
+  );
 };
 
-export default GameScreen
+export default GameScreen;
