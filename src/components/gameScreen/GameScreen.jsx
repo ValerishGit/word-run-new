@@ -1,16 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import CountdownComponent from "../countDown/CountDown";
+import {useDispatch,useSelector} from "react-redux";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import GlowingButton from "../glowingButton/GlowingButton";
 import TimeComponent from "../timerComponent/TimerComponent";
 import WordBox from "../wordBox/WordBox";
+import { changeWord, startGame } from "../../store/slice";
 
 export const GameScreen = ({ isHardMode }) => {
-  const [isStart, setIsStart] = useState(false);
+    GameScreen.propTypes = {
+        isHardMode : PropTypes.bool
+    }
+  const dispatch = useDispatch();
+  const game = useSelector((state)=>state.game.game);
   const [isGameOver, setIsGameOver] = useState(false);
-  const [gameClock, setGameClock] = useState(30);
 
   const [score, setScore] = useState(0);
   const navigateTo = useNavigate();
@@ -19,24 +23,22 @@ export const GameScreen = ({ isHardMode }) => {
     navigateTo("/");
   };
 
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
   const onTimerCompleted = () => {
-    setIsStart((tempisStart) => !tempisStart);
+    dispatch(startGame({
+        id:1,numOfPlayers:1,isHardMode:false,score:0,currentWord:"Example",isRunning:true,finalScore:0
+    }))
   };
 
   const onTimeOut = () => {
     setIsGameOver(true);
   };
 
-  const addScore = (lenght) => {
-    let mult = lenght * 2;
-    setScore((prevScore) => prevScore + mult);
-  };
 
   const restartGame = () => {
     setIsGameOver(false);
-    setIsStart(false);
     setScore(0);
   };
 
@@ -55,18 +57,23 @@ export const GameScreen = ({ isHardMode }) => {
     );
   };
 
+
+
   const MainGameScreen = () => {
+      useEffect(() => {
+        // Add the bounce animation class whenever score changes
+        const scoreText = document.getElementById('score-text');
+        scoreText.classList.add('animate-bounce');
+
+        setTimeout(()=>{
+            scoreText.classList.remove('animate-bounce');
+        },500)
+      }, [game.score]);
     return !isGameOver ? (
       <div className="flex flex-col h-screen w-[60vw] justify-evenly items-stretch">
-        <div className="flex flex-col md:flex-row gap-6 items-center justify-evenly ">
-          <TimeComponent
-            gameClock={gameClock}
-            onTimeOut={onTimeOut}
-          ></TimeComponent>
-          <p className="font-bold text-3xl">{score}</p>
-        </div>
-        <WordBox onCorrect={addScore}></WordBox>
-        <div className="h-[40vh]"></div>
+        <p id={"score-text"} className="font-bold text-8xl text-gray-700 ease-linear">{game.score}</p>
+        <WordBox></WordBox>
+        <div className="h-[50vh]"></div>
       </div>
     ) : (
       <GameOverSection></GameOverSection>
@@ -75,7 +82,7 @@ export const GameScreen = ({ isHardMode }) => {
 
   return (
     <div>
-      {!isStart ? (
+      {!game.isRunning ? (
         <CountdownComponent onComplete={onTimerCompleted}></CountdownComponent>
       ) : (
         <MainGameScreen></MainGameScreen>

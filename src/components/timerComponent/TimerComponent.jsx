@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
-const TimeComponent = ({ onTimeOut }) => {
+const TimeComponent = ({ onTimeOut}) => {
   TimeComponent.propTypes = {
     onTimeOut: PropTypes.func,
   };
