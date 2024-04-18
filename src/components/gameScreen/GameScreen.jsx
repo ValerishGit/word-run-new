@@ -6,7 +6,7 @@ import React, { useEffect, useRef, useState } from "react";
 import GlowingButton from "../glowingButton/GlowingButton";
 import TimeComponent from "../timerComponent/TimerComponent";
 import WordBox from "../wordBox/WordBox";
-import { changeWord, gameOver, startGame } from "../../store/slice";
+import { addScore, changeWord, gameOver, startGame } from "../../store/slice";
 import ScoreComponent from "../scoreComponent/ScoreComponent";
 import Timer from "../GameClock";
 import MemoCountdown from "../GameClock";
@@ -19,11 +19,12 @@ export const GameScreen = ({ isHardMode }) => {
   const game = useSelector((state) => state.game.game);
   const [isGameOver, setIsGameOver] = useState(false);
 
-  const [score, setScore] = useState(0);
   const navigateTo = useNavigate();
 
   const backHome = () => {
     navigateTo("/");
+    dispatch(gameOver());
+    setIsGameOver(false);
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,7 +39,7 @@ export const GameScreen = ({ isHardMode }) => {
         currentWord: "Example",
         isRunning: true,
         finalScore: 0,
-        timeOut: Date.now() + 30 * 1000,
+        timeOut: Date.now() + 300 * 1000,
       })
     );
   };
@@ -47,10 +48,13 @@ export const GameScreen = ({ isHardMode }) => {
     setIsGameOver(true);
   };
 
+  const onCorrect = ()=>{
+    console.log("Add Points");
+    dispatch(addScore());
+  }
+
   const restartGame = () => {
     setIsGameOver(false);
-
-    setScore(0);
     dispatch(
       startGame({
         id: 1,
@@ -88,7 +92,7 @@ export const GameScreen = ({ isHardMode }) => {
         <ScoreComponent></ScoreComponent>
         <br></br>
 
-        <WordBox></WordBox>
+        <WordBox onCorrect={onCorrect}></WordBox>
         <div className="h-[50vh]"></div>
       </div>
     ) : (
