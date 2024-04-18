@@ -60,7 +60,7 @@ const WordBox = ({ isHardMode, onCorrect, onTimeOut }) => {
   }, [handleKeyPress]);
 
   return (
-    <div className="h-[85%] flex flex-col justify-between items-center">
+    <div className="h-[80%] flex flex-col justify-between items-center">
  <div className="flex justify-center items-center w-full max-w-full overflow-hidden gap-1.5">
       {game.currentWord.split("").map((letter, index) => (
         <div
