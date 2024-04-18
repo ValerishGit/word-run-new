@@ -7,7 +7,8 @@ import GlowingButton from "../glowingButton/GlowingButton";
 import WordBox from "../wordBox/WordBox";
 import { addScore, gameOver, startGame } from "../../store/slice";
 import ScoreComponent from "../scoreComponent/ScoreComponent";
-import MemoCountdown from "../GameClock";
+
+const clockTime = 30;
 
 export const GameScreen = ({ isHardMode }) => {
   GameScreen.propTypes = {
@@ -37,7 +38,7 @@ export const GameScreen = ({ isHardMode }) => {
         currentWord: "Example",
         isRunning: true,
         finalScore: 0,
-        timeOut: Date.now() + 30 * 1000,
+        timeOut: Date.now() + clockTime * 1000,
       })
     );
   };
@@ -62,7 +63,7 @@ export const GameScreen = ({ isHardMode }) => {
         currentWord: "Example",
         isRunning: true,
         finalScore: 0,
-        timeOut: Date.now() + 30 * 1000,
+        timeOut: Date.now() + clockTime * 1000,
       })
     );
   };
@@ -84,11 +85,25 @@ export const GameScreen = ({ isHardMode }) => {
 
   const MainGameScreen = () => {
     return !isGameOver ? (
-      <div className="flex flex-col h-screen justify-evenly items-stretch">
-      <h1 className="text-2xl font-extrabold text-center">Word<span className='text-orange-400'>Run</span></h1>
+      <div className="flex flex-col h-screen justify-center items-stretch">
+      <h1 className="text-2xl flex-grow-[0] font-extrabold text-center">Word<span className='text-orange-400'>Run</span></h1>
       <br></br>
-        <ScoreComponent></ScoreComponent>
-        <WordBox onCorrect={onCorrect} isHardMode={isHardMode} onTimeOut={onTimeOut}></WordBox>
+      <div className="flex-grow-[0]">
+
+      <ScoreComponent></ScoreComponent>
+      </div>
+      <div>
+
+      </div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <h1 className="text-4xl font-bold text-center ">{game.currentWord.charAt(0).toUpperCase() + game.currentWord.slice(1)}</h1>
+      <br></br>
+      <div className="flex-grow-[1]">
+      <WordBox onCorrect={onCorrect} isHardMode={isHardMode} onTimeOut={onTimeOut}></WordBox>
+      </div>
+      
       </div>
     ) : (
       <GameOverSection></GameOverSection>

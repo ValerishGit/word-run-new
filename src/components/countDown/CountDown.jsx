@@ -26,14 +26,19 @@ const CountdownComponent = ({ onComplete, duration }) => {
   }, [count]);
 
   return (
-    <div className="flex justify-center items-center ">
-      <div
-        className={`text-8xl font-bold text-orange-300  ${
+    <div className="flex justify-center items-center">
+        <div className="flex flex-col gap-20">
+        <h3 className="text-2xl">Get Ready</h3>
+        <div
+        className={`text-5xl font-bold text-orange-300  ${
           visible ? "animate-fade-in" : "animate-fade-out"
         }`}
       >
         {count == 0 ? "Start" : count}
       </div>
+      <h3 className="text-2xl">To Type</h3>
+        </div>
+   
     </div>
   );
 };

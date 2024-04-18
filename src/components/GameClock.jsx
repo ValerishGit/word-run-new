@@ -9,7 +9,7 @@ const CountdownWrapper = ({ onComplete }) => {
 
     // Render a countdown
     return (
-      <span className={`text-4xl transition-colors duration-100 ${seconds <= 10 ? 'text-red-500 font-bold': 'text-gray-600 font-light '}`}>
+      <span className={`text-5xl transition-colors duration-100 ${seconds <= 10 ? 'text-red-500 font-bold text-6xl': 'text-gray-600 font-light '}`}>
         {formattedMinutes}:{formattedSeconds}
       </span>
     );
@@ -17,12 +17,16 @@ const CountdownWrapper = ({ onComplete }) => {
   const game = useSelector((state) => state.game.game);
 
   return (
-    <Countdown
+    <div>
+ <Countdown
 
-      date={game.timeOut}
-      onComplete={onComplete}
-      renderer={renderer}
-    />
+date={game.timeOut}
+onComplete={onComplete}
+renderer={renderer}
+/>
+
+    </div>
+   
   );
 };
 
