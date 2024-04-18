@@ -22,7 +22,6 @@ export const GameScreen = ({ isHardMode }) => {
 
   const backHome = () => {
     navigateTo("/");
-    dispatch(gameOver());
     setIsGameOver(false);
   };
 
@@ -38,17 +37,20 @@ export const GameScreen = ({ isHardMode }) => {
         isRunning: true,
         finalScore: 0,
         timeOut: Date.now() + clockTime * 1000,
+        bestScore: localStorage.getItem('bestScore') || 0,
       })
     );
   };
 
   const onTimeOut = () => {
+    dispatch(gameOver());
+
     setIsGameOver(true);
   };
 
   const onCorrect = ()=>{
     console.log("Add Points");
-    dispatch(addScore());
+    dispatch(addScore({word:game.currentWord.lenght}));
   }
 
   const restartGame = () => {
@@ -63,6 +65,7 @@ export const GameScreen = ({ isHardMode }) => {
         isRunning: true,
         finalScore: 0,
         timeOut: Date.now() + clockTime * 1000,
+        bestScore: localStorage.getItem('bestScore') || 0,
       })
     );
   };
@@ -86,6 +89,9 @@ export const GameScreen = ({ isHardMode }) => {
     return !isGameOver ? (
       <div className="flex flex-col h-screen justify-center items-stretch">
       <h1 className="text-2xl flex-grow-[0] font-extrabold text-center">Word<span className='text-orange-400'>Run</span></h1>
+
+      <p className="text-md flex-grow-[0] font-light text-center">Best:{game.bestScore}</p>
+
       <br></br>
       <div className="flex-grow-[0]">
 

@@ -9,7 +9,7 @@ const CountdownWrapper = ({ onComplete }) => {
 
     // Render a countdown
     return (
-      <span className={`text-5xl transition-colors duration-100 ${seconds <= 10 ? 'text-red-500 font-bold text-6xl': 'text-gray-600 font-light '}`}>
+      <span className={`text-3xl transition-all duration-900  ${seconds <= 10 ? 'animate-pulse text-red-500 font-bold text-4xl': 'text-gray-600 font-light '}`}>
         {formattedMinutes}:{formattedSeconds}
       </span>
     );

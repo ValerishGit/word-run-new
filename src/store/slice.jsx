@@ -104,6 +104,7 @@ const initialState = {
     currentWord:words[Math.floor(Math.random() * words.length)],
     isRunning: false,
     finalScore: 0,
+    bestScore: localStorage.getItem('bestScore') || 0,
   },
 };
 
@@ -111,23 +112,30 @@ export const gameSlice = createSlice({
   name: "game",
   initialState,
   reducers: {
+    resetGame:(state,action)=>{
+      state.game = initialState;
+    },
     startGame: (state, action) => {
       const newGame = action.payload;
       newGame.currentWord =  words[Math.floor(Math.random() * words.length)],
       state.game = newGame;
     },
     addScore: (state, action) => {
-      state.game.currentWord = words[Math.floor(Math.random() * words.length)];
       state.game.score += state.game.currentWord.length;
+
+      state.game.currentWord = words[Math.floor(Math.random() * words.length)];
+     
     },
     gameOver: (state, action) => {
-      state.game.finalScore = action.payload;
-      state.game.isRunning = false;
+      if (state.game.score > state.game.bestScore) {
+        state.game.bestScore = action.payload;
+        localStorage.setItem('bestScore', state.game.score); // Save bestScore to local storage
+      }
     },
     changeWord: (state, action) => {},
   },
 });
 
-export const { startGame, addScore, gameOver, changeWord } = gameSlice.actions;
+export const { startGame, addScore, gameOver, changeWord,resetGame} = gameSlice.actions;
 
 export default gameSlice.reducer;

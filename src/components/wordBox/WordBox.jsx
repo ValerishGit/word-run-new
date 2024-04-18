@@ -87,8 +87,6 @@ const WordBox = ({ isHardMode, onCorrect, onTimeOut }) => {
       <br></br>
       <MemoCountdown onComplete={onTimeOut}></MemoCountdown>
       <br></br>
-      <br></br>
-      <br></br>
       <Keyboard
         onKeyReleased={(val) => handleKeyPress(val)}
         physicalKeyboardHighlight={true}
