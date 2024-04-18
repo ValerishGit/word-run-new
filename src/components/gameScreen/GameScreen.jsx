@@ -35,7 +35,6 @@ export const GameScreen = ({ isHardMode }) => {
         numOfPlayers: 1,
         isHardMode: false,
         score: 0,
-        currentWord: "Example",
         isRunning: true,
         finalScore: 0,
         timeOut: Date.now() + clockTime * 1000,
@@ -98,7 +97,7 @@ export const GameScreen = ({ isHardMode }) => {
       <br></br>
       <br></br>
       <br></br>
-      <h1 className="text-4xl font-bold text-center ">{game.currentWord.charAt(0).toUpperCase() + game.currentWord.slice(1)}</h1>
+      <h1 className="text-4xl font-bold text-center ">{(game.currentWord ?? " ").charAt(0).toUpperCase() + game.currentWord.slice(1)}</h1>
       <br></br>
       <div className="flex-grow-[1]">
       <WordBox onCorrect={onCorrect} isHardMode={isHardMode} onTimeOut={onTimeOut}></WordBox>

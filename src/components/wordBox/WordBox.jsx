@@ -13,7 +13,7 @@ const WordBox = ({ isHardMode, onCorrect, onTimeOut }) => {
   };
   const game = useSelector((state) => state.game.game);
   const [expectedIndex, setExpectedIndex] = useState(0);
-
+  const [isCorrect,setIsCorrect] = useState(false);
   const [typedLetters, setTypedLetters] = useState(
     Array(game.currentWord.length).fill(false)
   );
@@ -38,9 +38,14 @@ const WordBox = ({ isHardMode, onCorrect, onTimeOut }) => {
       if (expectedIndex === game.currentWord.length - 1) {
         console.log(expectedIndex, game.currentWord.length - 1);
         console.log("Answered Correctly");
-        setExpectedIndex(0);
-        setTypedLetters([]);
-        onCorrect();
+        setIsCorrect(true);
+        setTimeout(() => {
+          setExpectedIndex(0);
+          setTypedLetters([]);
+          onCorrect();
+          setIsCorrect(false);
+        }, 400);
+
       }
     } else if (isHardMode) {
       if ("vibrate" in navigator) {
@@ -65,13 +70,14 @@ const WordBox = ({ isHardMode, onCorrect, onTimeOut }) => {
       {game.currentWord.split("").map((letter, index) => (
         <div
           key={index}
-          className="flex justify-center items-center p-0.5 lg:w-[4rem] lg:h-[4rem] w-[2.5rem] h-[2.5rem] md:min-w-[1.8rem] md:min-h-[3rem] border-orange-300 border rounded-lg"
+          style={{ background: typedLetters[index] ? !isCorrect ? "rgb(244, 182, 88)" :  "rgb(85,158,131)" : "transparent"}}
+          className={`flex justify-center items-center p-0.5 lg:w-[4rem] lg:h-[4rem] w-[2.5rem] h-[2.5rem] md:min-w-[1.8rem] md:min-h-[3rem] ${isCorrect ? "border-black" : "border-orange-300"}  border rounded-lg`}
         >
           <span
             className={`font-bold text-xl px-1 inline-block`}
-            style={{ color: typedLetters[index] ? "orange" : "grey" }}
+            style={{ color: typedLetters[index] ? !isCorrect ? "black" :  "black"  : "grey" }}
           >
-            {index === 0 ? letter.toUpperCase() : letter.toLowerCase()}
+            {letter.toUpperCase()}
           </span>
         </div>
       ))}

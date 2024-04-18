@@ -101,7 +101,7 @@ const initialState = {
     numOfPlayers: 1,
     isHardMode: false,
     score: 0,
-    currentWord: "Example",
+    currentWord:words[Math.floor(Math.random() * words.length)],
     isRunning: false,
     finalScore: 0,
   },
@@ -113,11 +113,12 @@ export const gameSlice = createSlice({
   reducers: {
     startGame: (state, action) => {
       const newGame = action.payload;
+      newGame.currentWord =  words[Math.floor(Math.random() * words.length)],
       state.game = newGame;
     },
     addScore: (state, action) => {
-      state.game.score += state.game.currentWord.length;
       state.game.currentWord = words[Math.floor(Math.random() * words.length)];
+      state.game.score += state.game.currentWord.length;
     },
     gameOver: (state, action) => {
       state.game.finalScore = action.payload;
