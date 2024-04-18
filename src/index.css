@@ -31,9 +31,15 @@
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
-
+.hg-button[data-skbtn=""] {
+  background-color: rgba(55, 55, 55, 1) !important;
+  border-bottom: none !important;
+  shadow-color: transparent; /* Change the background color as needed */
+  color: white; /* Change the text color as needed */
+}
 .simple-keyboard.myTheme1 .hg-button {
   height: 50px;
+  width: 40px;
   font-size: 1.2rem;
   font-family: "Nunito", sans-serif;
   font-weight: 600;
@@ -47,6 +53,13 @@
 .simple-keyboard.myTheme1 .hg-button:active {
   background: #1c4995;
   color: black;
+}
+
+.hg-row:nth-child(2) {
+  padding: 0px 8px; /* Adjust the padding as needed */
+}
+.hg-row:nth-child(3) {
+  padding: 0px 8px; /* Adjust the padding as needed */
 }
 .hg-theme-default .hg-row:not(:last-child) {
   margin-bottom: 9px;

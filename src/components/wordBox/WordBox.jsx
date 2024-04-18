@@ -80,6 +80,7 @@ const WordBox = ({isHardMode,onCorrect}) => {
       <Keyboard
         onKeyPress={(val) => handleKeyPress(val)}
         useMouseEvents={true}
+        useTouchEvents={true}
         physicalKeyboardHighlight={true}
         physicalKeyboardHighlightPress={true}
         physicalKeyboardHighlightPressUseClick={true}
@@ -90,8 +91,7 @@ const WordBox = ({isHardMode,onCorrect}) => {
           default: [
             "q w e r t y u i o p",
             "a s d f g h j k l",
-            "z x c v b n m",
-            "{space}"
+            " z x c v b n m ",
           ],
         }}
       />
