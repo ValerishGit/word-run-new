@@ -39,7 +39,7 @@ export const GameScreen = ({ isHardMode }) => {
         currentWord: "Example",
         isRunning: true,
         finalScore: 0,
-        timeOut: Date.now() + 300 * 1000,
+        timeOut: Date.now() + 30 * 1000,
       })
     );
   };

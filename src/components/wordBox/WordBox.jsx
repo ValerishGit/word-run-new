@@ -61,7 +61,7 @@ const WordBox = ({isHardMode,onCorrect}) => {
 
 
   return (
-    <div className="flex flex-col md:justify-between justify-center sm:gap-20 sm:p-4 items-center h-screen">
+    <div className="flex flex-col md:justify-between justify-center gap-10 p-4 items-center h-screen">
       <div
         className="bg-darkblue-800 rounded-lg py-6 px-8  border-orange-300 border  drop-shadow-none mx-auto "
         style={{ width: "90%" }}
@@ -76,6 +76,7 @@ const WordBox = ({isHardMode,onCorrect}) => {
           </span>
         ))}
       </div>
+      <br></br>
       <Keyboard
         onKeyPress={(val) => handleKeyPress(val)}
         useMouseEvents={true}
