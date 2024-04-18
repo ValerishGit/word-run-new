@@ -19,7 +19,7 @@ const HomeScreen = () => {
 }
 
   return (
-    <div className="p-4 flex flex-col justify-center items-center gap-24">
+    <div className="flex flex-col justify-center items-center gap-24">
       <div>
       <h1 className="text-6xl font-extrabold text-center animate-bounce">Word<span className='text-orange-400'>Run</span></h1>
       <p className="text-lg font-light text-center text-orange-300 ">How fast can you type?</p>

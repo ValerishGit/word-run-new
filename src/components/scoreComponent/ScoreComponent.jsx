@@ -4,7 +4,7 @@ const ScoreComponent = () => {
   const game = useSelector((state) => state.game.game);
 
   return (
-    <p className="font-bold text-8xl text-gray-700 ease-linear">{game.score}</p>
+    <p className="font-bold text-8xl text-orange-300 ease-linear">{game.score}</p>
   );
 };
 

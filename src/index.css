@@ -51,7 +51,7 @@
 }
 
 .simple-keyboard.myTheme1 .hg-button:active {
-  background: #1c4995;
+  background: white;
   color: black;
 }
 
@@ -62,7 +62,7 @@
   padding: 0px 8px; /* Adjust the padding as needed */
 }
 .hg-theme-default .hg-row:not(:last-child) {
-  margin-bottom: 9px;
+  margin-bottom: 0.4rem;
 }
 body {
   margin: 0;

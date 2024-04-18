@@ -2,13 +2,11 @@ import { useNavigate } from "react-router-dom";
 import CountdownComponent from "../countDown/CountDown";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import React, { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import GlowingButton from "../glowingButton/GlowingButton";
-import TimeComponent from "../timerComponent/TimerComponent";
 import WordBox from "../wordBox/WordBox";
-import { addScore, changeWord, gameOver, startGame } from "../../store/slice";
+import { addScore, gameOver, startGame } from "../../store/slice";
 import ScoreComponent from "../scoreComponent/ScoreComponent";
-import Timer from "../GameClock";
 import MemoCountdown from "../GameClock";
 
 export const GameScreen = ({ isHardMode }) => {
@@ -75,7 +73,7 @@ export const GameScreen = ({ isHardMode }) => {
         <h1>
           Game <span className="text-orange-300">Over</span>
         </h1>
-        <h1>{game.score}</h1>
+        <h1 >{game.score}</h1>
         <div className="flex flex-col md:flex-row  gap-5 items-center justify-center">
           <GlowingButton onClick={restartGame}>Try Again</GlowingButton>
           <GlowingButton onClick={backHome}>Back</GlowingButton>
@@ -87,13 +85,10 @@ export const GameScreen = ({ isHardMode }) => {
   const MainGameScreen = () => {
     return !isGameOver ? (
       <div className="flex flex-col h-screen justify-evenly items-stretch">
-        <MemoCountdown onComplete={onTimeOut}></MemoCountdown>
-        <br></br>
+      <h1 className="text-2xl font-extrabold text-center">Word<span className='text-orange-400'>Run</span></h1>
+      <br></br>
         <ScoreComponent></ScoreComponent>
-        <br></br>
-
-        <WordBox onCorrect={onCorrect}></WordBox>
-        <div className="h-[50vh]"></div>
+        <WordBox onCorrect={onCorrect} isHardMode={isHardMode} onTimeOut={onTimeOut}></WordBox>
       </div>
     ) : (
       <GameOverSection></GameOverSection>

@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
 import { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addScore } from "../../store/slice";
+import { useSelector } from "react-redux";
 import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
+import MemoCountdown from "../GameClock";
 
-const WordBox = ({isHardMode,onCorrect}) => {
+const WordBox = ({isHardMode,onCorrect,onTimeOut}) => {
   WordBox.propTypes = {
     isHardMode : PropTypes.bool,
+    onTimeOut:PropTypes.func,
     onCorrect:PropTypes.func
   }
-  const dispatch = useDispatch();
   const game = useSelector((state) => state.game.game);
   const [expectedIndex, setExpectedIndex] = useState(0);
 
@@ -42,6 +42,10 @@ const WordBox = ({isHardMode,onCorrect}) => {
         onCorrect();
 
       }
+
+      if ("vibrate" in navigator) {
+        navigator.vibrate(10); // Adjust the duration of vibration as needed (in milliseconds)
+      }
     } else if (isHardMode) {
       setExpectedIndex(0); // Reset expectedIndex if typed incorrectly
       setTypedLetters(Array(game.currentWord.length).fill(false)); // Reset typedLetters if typed incorrectly
@@ -61,7 +65,7 @@ const WordBox = ({isHardMode,onCorrect}) => {
 
 
   return (
-    <div className="flex flex-col md:justify-between justify-center gap-10 p-4 items-center h-screen">
+    <div className="flex flex-col md:justify-center justify-center gap-24  items-center h-screen">
       <div
         className="bg-darkblue-800 rounded-lg py-6 px-8  border-orange-300 border  drop-shadow-none mx-auto "
         style={{ width: "90%" }}
@@ -69,16 +73,15 @@ const WordBox = ({isHardMode,onCorrect}) => {
         {game.currentWord.split("").map((letter, index) => (
           <span
             key={index}
-            className={`font-bold text-3xl  inline-block`}
+            className={`font-bold text-3xl px-1  inline-block`}
             style={{ color: typedLetters[index] ? "orange" : "white" }}
           >
             {index == 0 ? letter.toUpperCase(): letter.toLowerCase()}
           </span>
         ))}
       </div>
-      <br></br>
+      <MemoCountdown onComplete={onTimeOut}></MemoCountdown>
       <Keyboard
-
         onKeyReleased={(val=> handleKeyPress(val))}
         physicalKeyboardHighlight={true}
         physicalKeyboardHighlightPress={true}
