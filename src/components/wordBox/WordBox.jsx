@@ -78,9 +78,8 @@ const WordBox = ({isHardMode,onCorrect}) => {
       </div>
       <br></br>
       <Keyboard
-        onKeyPress={(val) => handleKeyPress(val)}
-        useMouseEvents={true}
-        useTouchEvents={true}
+
+        onKeyReleased={(val=> handleKeyPress(val))}
         physicalKeyboardHighlight={true}
         physicalKeyboardHighlightPress={true}
         physicalKeyboardHighlightPressUseClick={true}
