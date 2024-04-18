@@ -19,6 +19,7 @@ const WordBox = ({isHardMode,onCorrect,onTimeOut}) => {
   );
 
   const handleKeyPress = useCallback((event) => {
+
     let inputLetter;
     if (typeof event === 'string')
     {
@@ -33,7 +34,9 @@ const WordBox = ({isHardMode,onCorrect,onTimeOut}) => {
       newTypedLetters[expectedIndex] = true;
       setTypedLetters(newTypedLetters);
       setExpectedIndex((prevIndex) => prevIndex + 1);
-
+      if ("vibrate" in navigator) {
+        navigator.vibrate(10); // Adjust the duration of vibration as needed (in milliseconds)
+      }
       if (expectedIndex === game.currentWord.length - 1) {
         console.log(expectedIndex,game.currentWord.length -1)
         console.log("Answered Correctly")
@@ -42,11 +45,10 @@ const WordBox = ({isHardMode,onCorrect,onTimeOut}) => {
         onCorrect();
 
       }
-
-      if ("vibrate" in navigator) {
-        navigator.vibrate(10); // Adjust the duration of vibration as needed (in milliseconds)
-      }
     } else if (isHardMode) {
+      if ("vibrate" in navigator) {
+        navigator.vibrate(30); // Adjust the duration of vibration as needed (in milliseconds)
+      }
       setExpectedIndex(0); // Reset expectedIndex if typed incorrectly
       setTypedLetters(Array(game.currentWord.length).fill(false)); // Reset typedLetters if typed incorrectly
     }
