@@ -21,6 +21,8 @@
   max-width: 850px;
 }
 
+
+
 /*
   Theme: myTheme1
 */
@@ -49,6 +51,21 @@
 .simple-keyboard.myTheme1 .hg-button:active {
   background: #1c4995;
   color: black;
+}
+
+.hg-button[data-skbtn=""] {
+  background-color: rgba(55, 55, 55, 1) !important;
+  border-bottom: none !important;
+  color: white; /* Change the text color as needed */
+}
+.hg-row:nth-child(2) {
+  padding: 0px 8px; /* Adjust the padding as needed */
+}
+.hg-row:nth-child(3) {
+  padding: 0px 8px; /* Adjust the padding as needed */
+}
+.hg-theme-default .hg-row:not(:last-child) {
+  margin-bottom: 0.4rem;
 }
 
 body {

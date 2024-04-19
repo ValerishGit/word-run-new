@@ -4,6 +4,7 @@ import Modal from "../modalsheet/CustomModal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { resetGame } from "../../store/slice";
+import ToggleSwitch from "../toggleSwitch";
 
 const HomeScreen = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,7 +38,6 @@ const HomeScreen = () => {
           Best:{game.bestScore}
         </p>
       </div>
-
       <div className="flex flex-col lg:flex-row gap-4">
         <GlowingButton onClick={startGame}>Start Game</GlowingButton>
         <GlowingButton onClick={openModal}>How to Play</GlowingButton>

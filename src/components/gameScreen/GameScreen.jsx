@@ -37,7 +37,7 @@ export const GameScreen = ({ isHardMode }) => {
         isRunning: true,
         finalScore: 0,
         timeOut: Date.now() + clockTime * 1000,
-        bestScore: localStorage.getItem('bestScore') || 0,
+        bestScore: localStorage.getItem("bestScore") || 0,
       })
     );
   };
@@ -48,10 +48,9 @@ export const GameScreen = ({ isHardMode }) => {
     setIsGameOver(true);
   };
 
-  const onCorrect = ()=>{
-    console.log("Add Points");
-    dispatch(addScore({word:game.currentWord.lenght}));
-  }
+  const onCorrect = () => {
+    dispatch(addScore({ word: game.currentWord.lenght }));
+  };
 
   const restartGame = () => {
     setIsGameOver(false);
@@ -65,7 +64,7 @@ export const GameScreen = ({ isHardMode }) => {
         isRunning: true,
         finalScore: 0,
         timeOut: Date.now() + clockTime * 1000,
-        bestScore: localStorage.getItem('bestScore') || 0,
+        bestScore: localStorage.getItem("bestScore") || 0,
       })
     );
   };
@@ -76,7 +75,7 @@ export const GameScreen = ({ isHardMode }) => {
         <h1>
           Game <span className="text-orange-300">Over</span>
         </h1>
-        <h1 >{game.score}</h1>
+        <h1>{game.score}</h1>
         <div className="flex flex-col md:flex-row  gap-5 items-center justify-center">
           <GlowingButton onClick={restartGame}>Try Again</GlowingButton>
           <GlowingButton onClick={backHome}>Back</GlowingButton>
@@ -87,28 +86,35 @@ export const GameScreen = ({ isHardMode }) => {
 
   const MainGameScreen = () => {
     return !isGameOver ? (
-      <div className="flex flex-col h-screen justify-center items-stretch">
-      <h1 className="text-2xl flex-grow-[0] font-extrabold text-center">Word<span className='text-orange-400'>Run</span></h1>
+      <div className="flex flex-col h-[100dvh] justify-center items-stretch">
+        <h1 className="text-2xl flex-grow-[0] font-extrabold text-center">
+          Word<span className="text-orange-400">Run</span>
+        </h1>
 
-      <p className="text-md flex-grow-[0] font-light text-center">Best:{game.bestScore}</p>
+        <p className="text-md flex-grow-[0] font-light text-center">
+          Best:{game.bestScore}
+        </p>
 
-      <br></br>
-      <div className="flex-grow-[0]">
-
-      <ScoreComponent></ScoreComponent>
-      </div>
-      <div>
-
-      </div>
-      <br></br>
-      <br></br>
-      <br></br>
-      <h1 className="text-4xl font-bold text-center ">{(game.currentWord ?? " ").charAt(0).toUpperCase() + game.currentWord.slice(1)}</h1>
-      <br></br>
-      <div className="flex-grow-[1]">
-      <WordBox onCorrect={onCorrect} isHardMode={isHardMode} onTimeOut={onTimeOut}></WordBox>
-      </div>
-      
+        <br></br>
+        <div className="flex-grow-[0]">
+          <ScoreComponent></ScoreComponent>
+        </div>
+        <div></div>
+        <br></br>
+        <br></br>
+        <br></br>
+        <h1 className="text-4xl font-bold text-center ">
+          {(game.currentWord ?? " ").charAt(0).toUpperCase() +
+            game.currentWord.slice(1)}
+        </h1>
+        <br></br>
+        <div className="flex-grow-[1]">
+          <WordBox
+            onCorrect={onCorrect}
+            isHardMode={isHardMode}
+            onTimeOut={onTimeOut}
+          ></WordBox>
+        </div>
       </div>
     ) : (
       <GameOverSection></GameOverSection>

@@ -16,7 +16,6 @@ const CountdownComponent = ({ onComplete, duration }) => {
         setVisible((prevVisible) => !prevVisible); // Toggle visibility
       } else {
         // Run your function when countdown reaches 0
-        console.log("Countdown reached 0!");
         setCount("Start");
         onComplete();
       }
@@ -27,18 +26,17 @@ const CountdownComponent = ({ onComplete, duration }) => {
 
   return (
     <div className="flex justify-center items-center">
-        <div className="flex flex-col gap-20">
+      <div className="flex flex-col gap-20">
         <h3 className="text-2xl">Get Ready</h3>
         <div
-        className={`text-5xl font-bold text-orange-300  ${
-          visible ? "animate-fade-in" : "animate-fade-out"
-        }`}
-      >
-        {count == 0 ? "Start" : count}
-      </div>
-      <h3 className="text-2xl">To Type</h3>
+          className={`text-5xl font-bold text-orange-300  ${
+            visible ? "animate-fade-in" : "animate-fade-out"
+          }`}
+        >
+          {count == 0 ? "Start" : count}
         </div>
-   
+        <h3 className="text-2xl">To Type</h3>
+      </div>
     </div>
   );
 };
