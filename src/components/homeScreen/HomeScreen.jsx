@@ -44,7 +44,7 @@ const HomeScreen = () => {
         <Modal isModalOpen={isModalOpen} onClose={closeModal} />
       </div>
       <div className="flex flex-col gap-1">
-        <span className="text-xs">Early Test V0.0.1</span>
+        <span className="text-xs">Early Test V0.0.2</span>
         <span className="text-xs text-orange-300">support@word-run.com</span>
       </div>
     </div>
