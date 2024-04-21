@@ -26,7 +26,7 @@ const WordBox = ({ isHardMode, onCorrect, onTimeOut }) => {
       inputLetter = event.key.toLowerCase();
     }
     const expectedLetter = game.currentWord[expectedIndex].toLowerCase();
-
+    console.log(isHardMode)
     if (inputLetter === expectedLetter) {
       const newTypedLetters = [...typedLetters];
       newTypedLetters[expectedIndex] = true;
@@ -90,9 +90,12 @@ const WordBox = ({ isHardMode, onCorrect, onTimeOut }) => {
             >
               {letter.toUpperCase()}
             </span>
+
           </div>
         ))}
       </div>
+      <p>{game.isHardMode ? "Hard Mode" : ""}</p>
+
       <br></br>
       <br></br>
       <br></br>
@@ -102,8 +105,9 @@ const WordBox = ({ isHardMode, onCorrect, onTimeOut }) => {
         onKeyReleased={(val) => handleKeyPress(val)}
         physicalKeyboardHighlight={true}
         physicalKeyboardHighlightPress={true}
+        
         physicalKeyboardHighlightPressUseClick={true}
-        physicalKeyboardHighlightBgColor="white"
+        physicalKeyboardHighlightBgColor={"lightgreen"}
         theme={"hg-theme-default myTheme1"}
         layoutName={"default"}
         layout={{

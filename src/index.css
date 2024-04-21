@@ -21,8 +21,6 @@
   max-width: 850px;
 }
 
-
-
 /*
   Theme: myTheme1
 */
@@ -34,8 +32,8 @@
 }
 
 .simple-keyboard.myTheme1 .hg-button {
-  height: 60px;
-  font-size: 24px;
+  height: 65px;
+  font-size: 20px;
   width: 60px;
   font-family: "Nunito", sans-serif;
 
@@ -44,12 +42,10 @@
   align-items: center;
   background: rgb(255, 195, 106);
   color: black;
-
-
 }
 
 .simple-keyboard.myTheme1 .hg-button:active {
-  background: #1c4995;
+  background: rgb(0, 195, 106);
   color: black;
 }
 
@@ -59,13 +55,22 @@
   color: white; /* Change the text color as needed */
 }
 .hg-row:nth-child(2) {
-  padding: 0px 8px; /* Adjust the padding as needed */
+  padding: 0px 11px; /* Adjust the padding as needed */
 }
 .hg-row:nth-child(3) {
-  padding: 0px 8px; /* Adjust the padding as needed */
+  padding: 0px 10px; /* Adjust the padding as needed */
 }
 .hg-theme-default .hg-row:not(:last-child) {
   margin-bottom: 0.4rem;
+}
+
+.section {
+  transition: opacity 0.5s ease;
+}
+
+.hidden {
+  opacity: 1;
+  pointer-events: none;
 }
 
 body {

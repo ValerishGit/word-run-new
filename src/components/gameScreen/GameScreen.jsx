@@ -32,7 +32,7 @@ export const GameScreen = ({ isHardMode }) => {
       startGame({
         id: 1,
         numOfPlayers: 1,
-        isHardMode: false,
+        isHardMode: game.isHardMode,
         score: 0,
         isRunning: true,
         finalScore: 0,
@@ -58,7 +58,7 @@ export const GameScreen = ({ isHardMode }) => {
       startGame({
         id: 1,
         numOfPlayers: 1,
-        isHardMode: false,
+        isHardMode: game.isHardMode,
         score: 0,
         currentWord: "Example",
         isRunning: true,
@@ -111,7 +111,7 @@ export const GameScreen = ({ isHardMode }) => {
         <div className="flex-grow-[1]">
           <WordBox
             onCorrect={onCorrect}
-            isHardMode={isHardMode}
+            isHardMode={game.isHardMode}
             onTimeOut={onTimeOut}
           ></WordBox>
         </div>

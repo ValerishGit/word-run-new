@@ -11,7 +11,7 @@ function App() {
         <Route
           exact
           path="/game-run"
-          element={<GameScreen isHardMode={false} />}
+          element={<GameScreen  />}
         />
       </Routes>
     </Router>

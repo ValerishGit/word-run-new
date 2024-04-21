@@ -113,7 +113,10 @@ export const gameSlice = createSlice({
   initialState,
   reducers: {
     resetGame:(state,action)=>{
-      state.game = initialState;
+      const newGame = action.payload;
+      newGame.currentWord =  words[Math.floor(Math.random() * words.length)],
+
+      state.game = newGame;
     },
     startGame: (state, action) => {
       const newGame = action.payload;
